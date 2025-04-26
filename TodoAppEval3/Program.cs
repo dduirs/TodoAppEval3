@@ -1,7 +1,5 @@
 ﻿// Crea un programa que permita gestionar tareas personales.
-
 // - TODO: ID. será único para cada tarea.
-//3. - Eliminar tarea por id.
 //5. - Importar tareas: se guardarán en la lista que gestiona la app las tareas ubicadas en el
 //                    fichero tareas.txt.
 class Program
@@ -24,8 +22,9 @@ class Program
             Console.WriteLine("               ocio:     4 / o");
             Console.WriteLine(" - \u001B[33mEliminar tarea:");
             Console.WriteLine("      escribe el id.\u001B[0m  o  5");
-            Console.WriteLine(" - \u001B[32mGestionar ficheros:\u001B[0m   6");
-            Console.WriteLine(" -           ~  Salir:   7");
+            Console.WriteLine(" - \u001B[32m Importar tareas:\u001B[0m   6");
+            Console.WriteLine(" - \u001B[32m Exportar tareas:\u001B[0m   7");
+            Console.WriteLine(" -           ~  Salir:   8");
             Console.WriteLine("  ──────────────────────── ");
 
             string? seleccion;
@@ -127,7 +126,9 @@ class Program
                 case 5:
                     if (tareaID > 0)
                     {
-                        listaTareas = manipularLista.EliminarTarea(listaTareas, tareaID);
+                        tarea = listaTareas.Find(t => t.Id == tareaID);
+                        listaTareas.Remove(tarea);
+                        // listaTareas = manipularLista.EliminarTarea(listaTareas, tareaID);
                         Console.WriteLine("\n   ──\u001B[33m────────────────────\u001B[0m");
                         Console.WriteLine("      Tarea " + tareaID + " eliminada.");
                         Console.WriteLine("   ──\u001B[33m────────────────────\u001B[0m\n");
@@ -159,17 +160,23 @@ class Program
                     Console.WriteLine("         Gestionar ficheros " + seleccionInt + "");
                     foreach (var todo in listaTareas)
                     {
-                        operaciones.ExportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt", todo);
+                        operaciones.ImportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt", todo);
                     }
                     Console.WriteLine("         Las tareas (" + listaTareas.Count() + ") se han exportado correctamente");
                     break;
                 case 7:
+                    foreach (var todo in listaTareas)
+                    {
+                        operaciones.ExportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt", todo);
+                    }
+                    Console.WriteLine("         Las tareas (" + listaTareas.Count() + ") se han exportado correctamente");
+                    break;
+                case 8:
                     Console.WriteLine("     Adios amigo.");
                     appActivo = false;
                     break;
-                // case 8:
-                    // manipularLista.ImprimirTareas(listaTareas);
-                    // break;
+                // manipularLista.ImprimirTareas(listaTareas);
+                // break;
                 default:
                     Console.WriteLine("     \u001B[33mLa selección no es válida.\u001B[0m\n     Intentar de nuevo.\n");
                     break;

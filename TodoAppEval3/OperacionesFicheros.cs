@@ -118,7 +118,7 @@ public class Operaciones
 
             // foreach (var tarea in listTareas)
             // {
-                streamWriter.WriteLine(tarea.ExportarData());
+            streamWriter.WriteLine(tarea.ExportarData());
             // }
         }
         catch (FileNotFoundException e)
@@ -144,59 +144,100 @@ public class Operaciones
 
     }
 
-//     public void ImportarUsuarios(String path)
-//     {
-//         if (!File.Exists(path))
-//         {
-//             Console.WriteLine("Fichero no existe.");
-//         }
-//         else
-//         {
-//             // FileStream? fileStream = null;
-//             StreamReader? streamReader = null;
-//             String? linea = null;      
-//             String? nombre, apellido, correo, telefono = null;
-//             Usuario? usuario1 = null;
-//             try
-//             {
-//                 // fileStream = new FileStream(path, FileMode.Append);
-//                 // streamReader = new StreamReader(fileStream);
-//                 while ((linea = streamReader.ReadLine()) != null)
-//                 {
-//                     // usuario1 = new Usuario();                    Console.WriteLine(linea);
-//                     nombre, apellido, correo, telefono = linea.Split(",");
-//                     // streamReader.ReadLine();
-//                 }
-//                 streamReader.Close();
+    public void ImportarTareas(String path, )
+    {
+        FileStream? fileStream = null;
+        StreamReader? streamReader = null;
+        try
+        {
+            fileStream = new FileStream(path, FileMode.Open);
+            streamReader = new StreamReader(fileStream);
 
-//                 foreach (var usuario in listUsuarios)
-//                 {
-//                     streamReader.ReadLine(usuario.ImportarDato());
-//                 }
-//             }
-//             catch (FileNotFoundException e)
-//             {
-//                 Console.WriteLine("Error: " + e.Message);
-//             }
-//             catch (IOException e)
-//             {
-//                 Console.WriteLine("Error: " + e.Message);
-//             }
-//             finally
-//             {
-//                 try
-//                 {
-//                     streamReader?.Close();
-//                     // fileStream?.Close();
-//                 }
-//                 catch (Exception e)
-//                 {
-//                     Console.WriteLine("Error: " + e.Message);
-//                 }
-//             }
-//         }
-//     }
-// }
+            String? linea = null;
+            while ((linea = streamReader.ReadLine()) != null)
+            {
+                Console.WriteLine(linea);
+                // streamReader.ReadLine();
+            }
+            streamReader.Close();
+
+        }
+        catch (FileNotFoundException e)
+        {
+            Console.WriteLine("Error: " + e.Message);
+        }
+        catch (IOException e)
+        {
+            Console.WriteLine("Error: " + e.Message);
+        }
+        finally
+        {
+            try
+            {
+                streamReader?.Close();
+                fileStream?.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e.Message);
+            }
+        }
+
+    }
+
+    //     public void ImportarUsuarios(String path)
+    //     {
+    //         if (!File.Exists(path))
+    //         {
+    //             Console.WriteLine("Fichero no existe.");
+    //         }
+    //         else
+    //         {
+    //             // FileStream? fileStream = null;
+    //             StreamReader? streamReader = null;
+    //             String? linea = null;      
+    //             String? nombre, apellido, correo, telefono = null;
+    //             Usuario? usuario1 = null;
+    //             try
+    //             {
+    //                 // fileStream = new FileStream(path, FileMode.Append);
+    //                 // streamReader = new StreamReader(fileStream);
+    //                 while ((linea = streamReader.ReadLine()) != null)
+    //                 {
+    //                     // usuario1 = new Usuario();                    Console.WriteLine(linea);
+    //                     nombre, apellido, correo, telefono = linea.Split(",");
+    //                     // streamReader.ReadLine();
+    //                 }
+    //                 streamReader.Close();
+
+    //                 foreach (var usuario in listUsuarios)
+    //                 {
+    //                     streamReader.ReadLine(usuario.ImportarDato());
+    //                 }
+    //             }
+    //             catch (FileNotFoundException e)
+    //             {
+    //                 Console.WriteLine("Error: " + e.Message);
+    //             }
+    //             catch (IOException e)
+    //             {
+    //                 Console.WriteLine("Error: " + e.Message);
+    //             }
+    //             finally
+    //             {
+    //                 try
+    //                 {
+    //                     streamReader?.Close();
+    //                     // fileStream?.Close();
+    //                 }
+    //                 catch (Exception e)
+    //                 {
+    //                     Console.WriteLine("Error: " + e.Message);
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
 }
 

@@ -9,29 +9,30 @@ public class ManipularListaTareas
         {
             if (tarea.tipo == tipo)
             {
+                Console.Write("              ");
                 tarea.ImprimirData();
             }
         }
         Console.WriteLine("\u001B[32m────────────────────────────────────────────────────────────────────────────────────────────────\u001B[0m\n");
     }
 
-    public List<Tarea> EliminarTarea(List<Tarea> listaTareas, int id)
-    {
-        Console.WriteLine("\u001B[33m────────────────────────────────────────────────────────────────────────────────────────────────\u001B[0m");
-        var list1 = listaTareas;
+    // public void EliminarTarea(List<Tarea> listaTareas, int id)
+    // {
+    //     Console.WriteLine("\u001B[33m────────────────────────────────────────────────────────────────────────────────────────────────\u001B[0m");
+    //     var list1 = listaTareas;
 
-        foreach (var tarea in list1)
-        {
-            if (tarea.Id == id)
-            {
-                tarea.ImprimirData();
-                list1.Remove(tarea);
-                // listaTareas.removeif(new Predicate<tarea>());
-            }
-        }
-        Console.WriteLine("\u001B[33m────────────────────────────────────────────────────────────────────────────────────────────────\u001B[0m\n");
-        return listaTareas;
-    }
+    //     foreach (var tarea in list1)
+    //     {
+    //         if (tarea.Id == id)
+    //         {
+    //             tarea.ImprimirData();
+    //             list1.Remove(tarea);
+    //             // listaTareas.removeif(new Predicate<tarea>());
+    //         }
+    //     }
+    //     Console.WriteLine("\u001B[33m────────────────────────────────────────────────────────────────────────────────────────────────\u001B[0m\n");
+    //     // return list1;
+    // }
 
     // public void ImprimirTareas(List<Tarea> listaTareas)
     // {
