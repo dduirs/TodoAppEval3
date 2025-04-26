@@ -1,27 +1,11 @@
-﻿// Entender y manejar los objetos
+﻿// Crea un programa que permita gestionar tareas personales.
 
-// Crea un programa que permita gestionar tareas personales.
-//  MENU:
-// Generar y gestionar las listas
-//1. - Crear tareas: se pedirá el nombre, descripción, tipo (personal, trabajo, ocio) y prioridad de la tarea
-//                                                      (^ necesario utilizar un Enum por los tipos)
-// - El id se asignará automáticamente y será único para cada tarea.
-// - La prioridad es un booleano.
-
-//2. - Buscar tareas por tipo(personal, trabajo, ocio): se mostrarán todas las tareas de dicho tipo.
-
+// - TODO: ID. será único para cada tarea.
 //3. - Eliminar tarea por id.
-
-// Leer y Escribir ficheros:
-//4. - Exportar todas las tareas a "tareas.txt": se generará un fichero llamado tareas.txt
-
-//  en cada fila aparecerá el id, nombre, descripción, tipo y prioridad
-
 //5. - Importar tareas: se guardarán en la lista que gestiona la app las tareas ubicadas en el
 //                    fichero tareas.txt.
 class Program
 {
-    // public List<Tarea> listaTareas = new();
     public static void Main(string[] args)
     {
         Operaciones operaciones = new Operaciones();
@@ -82,7 +66,7 @@ class Program
                     Console.WriteLine("\u001B[32m  Creando una tarea nueva:\u001B[0m\n");
                     string? input;
                     Tipo tipo;
-                    Console.Write("   # Escribe el tipo de la tarea (\u001B[32mp\u001B[0m = personal, \u001B[32mt\u001B[0m = trabajo, \u001B[32mo\u001B[0m = ocio): \u001B[32m");
+                    Console.Write("   # Elige el tipo de la tarea (\u001B[32mp\u001B[0m = personal, \u001B[32mt\u001B[0m = trabajo, \u001B[32mo\u001B[0m = ocio): \u001B[32m");
                     bool tipoValida;
                     do
                     {
@@ -121,10 +105,9 @@ class Program
                         tarea.Prioridad = false;
                     }
 
-                    // tarea = new Tarea(idTarea, "Evaluable_3", "applicacion de lista de tareas", Tipo.trabajo, true);
                     listaTareas.Add(tarea);
                     idTarea++;
-                    Console.WriteLine("─────────────\u001B[32m────────────────────────────────────────────────────────────────────────────────────\u001B[0m");
+                    Console.WriteLine("\n─────────────\u001B[32m────────────────────────────────────────────────────────────────────────────────────\u001B[0m");
                     Console.Write("\u001B[32mTAREA CREADA:  \u001B[0m");
                     tarea.ImprimirData();
                     Console.WriteLine("─────────────\u001B[32m────────────────────────────────────────────────────────────────────────────────────\u001B[0m\n");
@@ -132,27 +115,22 @@ class Program
                 case 2:
                     Console.WriteLine("\u001B[32m  Tareas\u001B[0m PERSONALES:");
                     manipularLista.SortTareas(listaTareas, Tipo.personal);
-                    // Console.WriteLine("         Buscar tareas tipo PERSONAL  " + seleccionInt + "");
                     break;
                 case 3:
                     Console.WriteLine("\u001B[32m  Tareas\u001B[0m de TRABAJO:");
                     manipularLista.SortTareas(listaTareas, Tipo.trabajo);
-                    // Console.WriteLine("         Buscar tareas tipo TRABAJO  " + seleccionInt + "");
                     break;
                 case 4:
                     Console.WriteLine("\u001B[32m  Tareas\u001B[0m de OCIO:");
                     manipularLista.SortTareas(listaTareas, Tipo.ocio);
-                    // Console.WriteLine("         Buscar tareas tipo OCIO " + seleccionInt + "");
                     break;
                 case 5:
                     if (tareaID > 0)
                     {
                         listaTareas = manipularLista.EliminarTarea(listaTareas, tareaID);
-                        // EliminarTarea por id (tareaID)
                         Console.WriteLine("\n   ──\u001B[33m────────────────────\u001B[0m");
                         Console.WriteLine("      Tarea " + tareaID + " eliminada.");
                         Console.WriteLine("   ──\u001B[33m────────────────────\u001B[0m\n");
-                        // Console.WriteLine(" \u001B[33m|||||||||||||||||||||||||||||||||||||||\u001B[0m\n");
                     }
                     else
                     {

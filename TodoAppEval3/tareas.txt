@@ -1,6 +1,0 @@
-
-ID: 10,    Nombre: me,    Descripción: stuff,  Tipo: personal,    Prioridad: False
-ID: 11,    Nombre: work,    Descripción: hard,  Tipo: trabajo,    Prioridad: True
-ID: 12,    Nombre: fun,    Descripción: play,  Tipo: ocio,    Prioridad: False
-ID: 10,    Nombre: PASEAR,    Descripción: IR AL PARQUE,  Tipo: ocio,    Prioridad: False
-ID: 10   Nombre: [32mTEst[0m   Descripción: [32mFUN[0m   Tipo: [32mocio[0m   Prioridad: False

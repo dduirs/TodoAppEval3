@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{911E67C6-3D85-4FCE-B560-20A9C3E3FF48}") = "TodoAppEval3", "TodoAppEval3.exe", "{8DB63728-0016-4171-883D-52619F222844}"
+	ProjectSection(DebuggerProjectSystem) = preProject
+		PortSupplier = 00000000-0000-0000-0000-000000000000
+		Executable = C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\bin\Debug\net8.0\TodoAppEval3.exe
+		RemoteMachine = DAVIDS-ACER
+		StartingDirectory = C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\bin\Debug\net8.0
+		Environment = Default
+		LaunchingEngine = 00000000-0000-0000-0000-000000000000
+		UseLegacyDebugEngines = No
+		LaunchSQLEngine = No
+		AttachLaunchAction = No
+		IORedirection = Auto
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DB63728-0016-4171-883D-52619F222844}.Release|x64.ActiveCfg = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24586C07-2604-48A6-873C-B7D652A7858B}
+	EndGlobalSection
+EndGlobal

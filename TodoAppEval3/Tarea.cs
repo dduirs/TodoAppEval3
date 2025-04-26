@@ -37,7 +37,12 @@ public class Tarea
 
     public void ImprimirData()
     {
-        Console.WriteLine("ID: \u001B[32m" + this.Id + "\u001B[0m   Nombre: \u001B[32m" + this.Nombre + "\u001B[0m   Descripción: \u001B[32m" + this.Descripcion + "\u001B[0m   Tipo: \u001B[32m" + this.tipo + "\u001B[0m   Prioridad: \u001B[32m" + this.Prioridad + "\u001B[0m");
+        Console.Write("ID: \u001B[32m" + this.Id + "\u001B[0m   Nombre: \u001B[32m" + this.Nombre + "\u001B[0m   Descripción: \u001B[32m" + this.Descripcion + "\u001B[0m   Tipo: \u001B[32m" + this.tipo + "\u001B[0m   Prioridad: \u001B[32m");
+        if((bool)this.Prioridad){
+        Console.WriteLine("sí\u001B[0m");
+            }else{
+        Console.WriteLine("no\u001B[0m");
+            } 
     }
 
 }
