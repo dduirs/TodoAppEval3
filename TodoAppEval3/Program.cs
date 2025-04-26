@@ -30,22 +30,9 @@ class Program
         // StreamReader sr = new StreamReader("TodoAppEval3/Program.cs");
         // sr.ReadLine();
         bool appActivo = true;
+        int idTarea = 1;
         do
         {
-            // Console.WriteLine("  ~~~~~~~~~ Menú ~~~~~~~~~");
-            // Console.WriteLine(" - \u001B[32mCrear\u001B[0m tarea:          1");
-            // Console.WriteLine(" - \u001B[32mBuscar\u001B[0m por:");
-            // // Console.WriteLine(" (por tipo)");
-            // Console.WriteLine("            Persona:     2 / p");
-            // Console.WriteLine("            Trabajo:     3 / t");
-            // Console.WriteLine("               Ocio:     4 / o");
-            // Console.WriteLine(" - \u001B[33mEliminar\u001B[0m:");
-            // Console.WriteLine("            por\u001B[33m id\u001B[0m   o   5");
-            // Console.WriteLine(" - \u001B[32mGestionar:\u001B[0m");
-            // Console.WriteLine("          ficheros:      6");
-            // Console.WriteLine(" - Salir de la app:      7");
-            // Console.WriteLine("  ~~~~~~~~~~~~~~~~~~~~~~~~ ");
-
             Console.WriteLine("  ~~~~~~~~~ Menú ~~~~~~~~~");
             Console.WriteLine(" - \u001B[32mCrear tarea:\u001B[0m          1");
             Console.WriteLine(" - \u001B[32mBuscar tareas:\u001B[0m");
@@ -95,6 +82,11 @@ class Program
             {
                 case 1:
                     Console.WriteLine("         Crear tarea  " + eleccionInt + "");
+                    Tarea tarea = new Tarea(idTarea, "Evaluable_3", "applicacion de lista de tareas", Tipo.trabajo, true);
+                    Operaciones operaciones = new Operaciones();
+                    operaciones.ExportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt", tarea);
+                    idTarea++;
+                    Console.WriteLine(tarea.ExportarDato());
                     break;
                 case 2:
                     Console.WriteLine("         Buscar tareas tipo PERSONA  " + eleccionInt + "");
@@ -158,10 +150,24 @@ class Program
         // Console.WriteLine("Trabajo con ficheros");
         // Console.WriteLine("OperacionesFicheros class initialized.");
         // Operaciones operaciones = new Operaciones();
-        // // operaciones.ObtenerInformacion("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/escritura.txt");
-        // // operaciones.EscribirFichero("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/escritura.txt");
-        // // operaciones.LeerFichero("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/escritura.txt");
-        // operaciones.ExportarUsuarios("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/usuarios.txt");
+        // // operaciones.ObtenerInformacion("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt");
+        // // operaciones.EscribirFichero("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt");
+        // // operaciones.LeerFichero("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt");
+        // operaciones.ExportarUsuarios("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt");
     }
 
 }
+
+// Console.WriteLine("  ~~~~~~~~~ Menú ~~~~~~~~~");
+// Console.WriteLine(" - \u001B[32mCrear\u001B[0m tarea:          1");
+// Console.WriteLine(" - \u001B[32mBuscar\u001B[0m por:");
+// // Console.WriteLine(" (por tipo)");
+// Console.WriteLine("            Persona:     2 / p");
+// Console.WriteLine("            Trabajo:     3 / t");
+// Console.WriteLine("               Ocio:     4 / o");
+// Console.WriteLine(" - \u001B[33mEliminar\u001B[0m:");
+// Console.WriteLine("            por\u001B[33m id\u001B[0m   o   5");
+// Console.WriteLine(" - \u001B[32mGestionar:\u001B[0m");
+// Console.WriteLine("          ficheros:      6");
+// Console.WriteLine(" - Salir de la app:      7");
+// Console.WriteLine("  ~~~~~~~~~~~~~~~~~~~~~~~~ ");

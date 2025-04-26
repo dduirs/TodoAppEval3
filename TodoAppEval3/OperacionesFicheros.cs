@@ -97,15 +97,15 @@ public class Operaciones
         }
     }
 
-    private List<Usuario> listUsuarios;
+    private List<Tarea> listTareas;
 
     public Operaciones()
     {
-        listUsuarios = new List<Usuario>();
-        listUsuarios.Add(new Usuario("David1", "W", "DW@mail.com", 123456));
+        listTareas = new List<Tarea>();
+        // listTareas.Add();
     }
 
-    public void ExportarUsuarios(String path)
+    public void ExportarTareas(String path, Tarea tarea)
     {
         if (!File.Exists(path))
         {
@@ -119,10 +119,10 @@ public class Operaciones
             fileStream = new FileStream(path, FileMode.Append);
             streamWriter = new StreamWriter(fileStream);
 
-            foreach (var usuario in listUsuarios)
-            {
-                streamWriter.WriteLine(usuario.ExportarDato());
-            }
+            // foreach (var tarea in listTareas)
+            // {
+                streamWriter.WriteLine(tarea.ExportarDato());
+            // }
         }
         catch (FileNotFoundException e)
         {
