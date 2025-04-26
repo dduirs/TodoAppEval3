@@ -1,0 +1,15 @@
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\bin\Debug\net8.0\TodoAppEval3.exe
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\bin\Debug\net8.0\TodoAppEval3.deps.json
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\bin\Debug\net8.0\TodoAppEval3.runtimeconfig.json
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\bin\Debug\net8.0\TodoAppEval3.dll
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\bin\Debug\net8.0\TodoAppEval3.pdb
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\obj\Debug\net8.0\TodoAppEval3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\obj\Debug\net8.0\TodoAppEval3.AssemblyInfoInputs.cache
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\obj\Debug\net8.0\TodoAppEval3.AssemblyInfo.cs
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\obj\Debug\net8.0\TodoAppEval3.csproj.CoreCompileInputs.cache
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\obj\Debug\net8.0\TodoAppEval3.sourcelink.json
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\obj\Debug\net8.0\TodoAppEval3.dll
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\obj\Debug\net8.0\refint\TodoAppEval3.dll
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\obj\Debug\net8.0\TodoAppEval3.pdb
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\obj\Debug\net8.0\TodoAppEval3.genruntimeconfig.cache
+C:\Users\davo_\Documents\GitHub\TodoAppEval3\TodoAppEval3\obj\Debug\net8.0\ref\TodoAppEval3.dll
