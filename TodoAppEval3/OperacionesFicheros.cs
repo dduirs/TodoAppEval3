@@ -1,4 +1,3 @@
-
 using System.Reflection;
 
 public class Operaciones
@@ -47,8 +46,6 @@ public class Operaciones
     }
 
     public void LeerFichero(String ruta)
-
-
     {
         // FileStream fileStream = new FileStream(ruta, FileMode.Open);
         // StreamReader streamReader = new StreamReader(fileStream);
@@ -97,13 +94,13 @@ public class Operaciones
         }
     }
 
-    private List<Tarea> listTareas;
+    // public List<Tarea> listTareas;
 
-    public Operaciones()
-    {
-        listTareas = new List<Tarea>();
-        // listTareas.Add();
-    }
+    // public Operaciones()
+    // {
+    //     listTareas = new List<Tarea>();
+    //     // listTareas.Add();
+    // }
 
     public void ExportarTareas(String path, Tarea tarea)
     {
@@ -121,7 +118,7 @@ public class Operaciones
 
             // foreach (var tarea in listTareas)
             // {
-                streamWriter.WriteLine(tarea.ExportarDato());
+                streamWriter.WriteLine(tarea.ExportarData());
             // }
         }
         catch (FileNotFoundException e)

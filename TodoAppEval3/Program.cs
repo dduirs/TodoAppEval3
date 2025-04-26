@@ -3,12 +3,12 @@
 // Crea un programa que permita gestionar tareas personales.
 //  MENU:
 // Generar y gestionar las listas
-//1. - Crear tareas: se pedirá el nombre, descripción, tipo (persona, trabajo, ocio) y prioridad de la tarea
+//1. - Crear tareas: se pedirá el nombre, descripción, tipo (personal, trabajo, ocio) y prioridad de la tarea
 //                                                      (^ necesario utilizar un Enum por los tipos)
 // - El id se asignará automáticamente y será único para cada tarea.
 // - La prioridad es un booleano.
 
-//2. - Buscar tareas por tipo(persona, trabajo, ocio): se mostrarán todas las tareas de dicho tipo.
+//2. - Buscar tareas por tipo(personal, trabajo, ocio): se mostrarán todas las tareas de dicho tipo.
 
 //3. - Eliminar tarea por id.
 
@@ -21,98 +21,149 @@
 //                    fichero tareas.txt.
 class Program
 {
+    // public List<Tarea> listaTareas = new();
     public static void Main(string[] args)
     {
-        // Console.WriteLine("Hello, World!");
-        // // TodoAppEval3\Program.cs
-        // File file = new File("TodoAppEval3/Program.cs");
-        // // FileStream
-        // StreamReader sr = new StreamReader("TodoAppEval3/Program.cs");
-        // sr.ReadLine();
+        Operaciones operaciones = new Operaciones();
+        ManipularListaTareas manipularLista = new ManipularListaTareas();
+        Tarea tarea;
+        List<Tarea> listaTareas = [];
         bool appActivo = true;
-        int idTarea = 1;
+        int idTarea = 10; // los id empezan por 10 para que puedas eliminar las tareas del menu directamente.
         do
         {
-            Console.WriteLine("  ~~~~~~~~~ Menú ~~~~~~~~~");
+            Console.WriteLine("  ───────── MENÚ ────────");
             Console.WriteLine(" - \u001B[32mCrear tarea:\u001B[0m          1");
             Console.WriteLine(" - \u001B[32mBuscar tareas:\u001B[0m");
-            // Console.WriteLine(" (por tipo)");
-            Console.WriteLine("            persona:     2 / p");
+            Console.WriteLine("            personal:    2 / p");
             Console.WriteLine("            trabajo:     3 / t");
             Console.WriteLine("               ocio:     4 / o");
             Console.WriteLine(" - \u001B[33mEliminar tarea:");
-            Console.WriteLine("      escribe la id\u001B[0m   o  5");
+            Console.WriteLine("      escribe el id.\u001B[0m  o  5");
             Console.WriteLine(" - \u001B[32mGestionar ficheros:\u001B[0m   6");
             Console.WriteLine(" -           ~  Salir:   7");
-            Console.WriteLine("  ~~~~~~~~~~~~~~~~~~~~~~~~ ");
+            Console.WriteLine("  ──────────────────────── ");
 
-            string? eleccion;
-            int eleccionInt;
-            eleccion = Console.ReadLine();
-            if (eleccion == "p" | eleccion == "t" | eleccion == "o")
+            string? seleccion;
+            int seleccionInt;
+            seleccion = Console.ReadLine();
+            if (seleccion == "p" | seleccion == "t" | seleccion == "o")
             {
-                if (eleccion == "p")
+                if (seleccion == "p")
                 {
-                    eleccionInt = 2;
+                    seleccionInt = 2;
                 }
-                else if (eleccion == "t")
+                else if (seleccion == "t")
                 {
-                    eleccionInt = 3;
+                    seleccionInt = 3;
                 }
                 else
                 {
-                    eleccionInt = 4;
+                    seleccionInt = 4;
                 }
             }
             else
             {
-                int.TryParse(eleccion, out eleccionInt);
+                int.TryParse(seleccion, out seleccionInt);
             }
             int tareaID = -1;
-            if (eleccionInt > 7 && eleccionInt < 10)
+            if (seleccionInt > 7 && seleccionInt < 10)
             {
-                eleccionInt = 8;
+                seleccionInt = 8;
             }
-            if (eleccionInt > 9)
+            if (seleccionInt > 9)
             {
-                tareaID = eleccionInt;
-                eleccionInt = 5; // saltar a caso 5 -> "Eliminar tarea por ID"
+                tareaID = seleccionInt;
+                seleccionInt = 5; // saltar a caso 5 -> "Eliminar tarea por ID"
             }
-            switch (eleccionInt)
+            switch (seleccionInt)
             {
                 case 1:
-                    Console.WriteLine("         Crear tarea  " + eleccionInt + "");
-                    Tarea tarea = new Tarea(idTarea, "Evaluable_3", "applicacion de lista de tareas", Tipo.trabajo, true);
-                    Operaciones operaciones = new Operaciones();
-                    operaciones.ExportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt", tarea);
+                    Console.WriteLine("\u001B[32m  Creando una tarea nueva:\u001B[0m\n");
+                    string? input;
+                    Tipo tipo;
+                    Console.Write("   # Escribe el tipo de la tarea (\u001B[32mp\u001B[0m = personal, \u001B[32mt\u001B[0m = trabajo, \u001B[32mo\u001B[0m = ocio): \u001B[32m");
+                    bool tipoValida;
+                    do
+                    {
+                        tipo = (Tipo)Console.Read();
+                        if ((int)tipo == 111 || (int)tipo == 112 || (int)tipo == 116)
+                        {
+                            tipoValida = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("\u001B[33mLa entrada no es válida.\u001B[0m Las opciones son: \u001B[32mp\u001B[0m = personal, \u001B[32mt\u001B[0m = trabajo, \u001B[32mo\u001B[0m = ocio.");
+                            tipoValida = false;
+                        }
+                        Console.ReadLine();
+                    }
+                    while (!tipoValida);
+                    // tipo = (Tipo)inputInt;
+                    tarea = new Tarea(idTarea, tipo);
+
+                    Console.Write("\u001B[0m   # \u001B[32mEscribe el nombre de la tarea: \u001B[0m");
+                    input = Console.ReadLine();
+                    tarea.Nombre = input;
+
+                    Console.Write("   # Escribe la descripción de la tarea: \u001B[32m");
+                    input = Console.ReadLine();
+                    tarea.Descripcion = input;
+
+                    Console.Write("\u001B[0m   # \u001B[32mEscribe si la tarea es prioridad (s o n): \u001B[0m");
+                    input = Console.ReadLine();
+                    if (input == "s")
+                    {
+                        tarea.Prioridad = true;
+                    }
+                    else
+                    {
+                        tarea.Prioridad = false;
+                    }
+
+                    // tarea = new Tarea(idTarea, "Evaluable_3", "applicacion de lista de tareas", Tipo.trabajo, true);
+                    listaTareas.Add(tarea);
                     idTarea++;
-                    Console.WriteLine(tarea.ExportarDato());
+                    Console.WriteLine("─────────────\u001B[32m────────────────────────────────────────────────────────────────────────────────────\u001B[0m");
+                    Console.Write("\u001B[32mTAREA CREADA:  \u001B[0m");
+                    tarea.ImprimirData();
+                    Console.WriteLine("─────────────\u001B[32m────────────────────────────────────────────────────────────────────────────────────\u001B[0m\n");
                     break;
                 case 2:
-                    Console.WriteLine("         Buscar tareas tipo PERSONA  " + eleccionInt + "");
+                    Console.WriteLine("\u001B[32m  Tareas\u001B[0m PERSONALES:");
+                    manipularLista.SortTareas(listaTareas, Tipo.personal);
+                    // Console.WriteLine("         Buscar tareas tipo PERSONAL  " + seleccionInt + "");
                     break;
                 case 3:
-                    Console.WriteLine("         Buscar tareas tipo TRABAJO  " + eleccionInt + "");
+                    Console.WriteLine("\u001B[32m  Tareas\u001B[0m de TRABAJO:");
+                    manipularLista.SortTareas(listaTareas, Tipo.trabajo);
+                    // Console.WriteLine("         Buscar tareas tipo TRABAJO  " + seleccionInt + "");
                     break;
                 case 4:
-                    Console.WriteLine("         Buscar tareas tipo OCIO " + eleccionInt + "");
+                    Console.WriteLine("\u001B[32m  Tareas\u001B[0m de OCIO:");
+                    manipularLista.SortTareas(listaTareas, Tipo.ocio);
+                    // Console.WriteLine("         Buscar tareas tipo OCIO " + seleccionInt + "");
                     break;
                 case 5:
                     if (tareaID > 0)
                     {
+                        listaTareas = manipularLista.EliminarTarea(listaTareas, tareaID);
                         // EliminarTarea por id (tareaID)
-                        Console.WriteLine("         Tarea " + tareaID + " eliminada.");
+                        Console.WriteLine("\n   ──\u001B[33m────────────────────\u001B[0m");
+                        Console.WriteLine("      Tarea " + tareaID + " eliminada.");
+                        Console.WriteLine("   ──\u001B[33m────────────────────\u001B[0m\n");
+                        // Console.WriteLine(" \u001B[33m|||||||||||||||||||||||||||||||||||||||\u001B[0m\n");
                     }
                     else
                     {
                         do
                         {
-                            Console.WriteLine("     Escribe la id de la tarea que quieres elimiar: ");
-                            eleccion = Console.ReadLine();
-                            int.TryParse(eleccion, out tareaID);
+                            Console.WriteLine("     Escribe el id de la tarea que quieres eliminar: ");
+                            seleccion = Console.ReadLine();
+                            int.TryParse(seleccion, out tareaID);
                             if (tareaID > -1 && tareaID < 10)
                             {
-                                Console.WriteLine("     \u001B[33mLa id no existe.\u001B[0m Intentar de nuevo, o escribe -1 para salir.");
+                                Console.WriteLine("     \u001B[33mEl id no existe.\u001B[0m Intentar de nuevo, o escribe -1 para salir.");
                             }
                         } while (tareaID > -1 && tareaID < 10);
                         if (tareaID < 0)
@@ -120,31 +171,31 @@ class Program
                             Console.WriteLine("     Cargando menú ...");
                             break;
                         }
-                        // EliminarTarea por id (eleccionInt)
-                        Console.WriteLine("         Tarea " + tareaID + " eliminada.");
+                        // EliminarTarea por id (seleccionInt)
+                        Console.WriteLine("\n   ──\u001B[33m────────────────────\u001B[0m");
+                        Console.WriteLine("      Tarea " + tareaID + " eliminada.");
+                        Console.WriteLine("   ──\u001B[33m────────────────────\u001B[0m\n");
                     }
                     break;
                 case 6:
-                    Console.WriteLine("         Gestionar ficheros " + eleccionInt + "");
-                    // do
-                    // {
-                    //     Console.WriteLine("Exportar todas las tareas a");
-                    //     Console.WriteLine("Menú: ");
-                    // } while ()
+                    Console.WriteLine("         Gestionar ficheros " + seleccionInt + "");
+                    foreach (var todo in listaTareas)
+                    {
+                        operaciones.ExportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt", todo);
+                    }
+                    Console.WriteLine("         Las tareas (" + listaTareas.Count() + ") se han exportado correctamente");
                     break;
                 case 7:
                     Console.WriteLine("     Adios amigo.");
                     appActivo = false;
                     break;
-                // case 0:
-                //     Console.WriteLine("elección no es valida");
-                //     break;
-                case 8:
+                // case 8:
+                    // manipularLista.ImprimirTareas(listaTareas);
+                    // break;
                 default:
-                    Console.WriteLine("     \u001B[33mLa elección no es válida.\u001B[0m\n     Intentar de nuevo.");
+                    Console.WriteLine("     \u001B[33mLa selección no es válida.\u001B[0m\n     Intentar de nuevo.\n");
                     break;
             }
-            Console.WriteLine(" |||||||||||||||||||||||||||||||||||||||\n");
         } while (appActivo);
 
         // Console.WriteLine("Trabajo con ficheros");
@@ -162,7 +213,7 @@ class Program
 // Console.WriteLine(" - \u001B[32mCrear\u001B[0m tarea:          1");
 // Console.WriteLine(" - \u001B[32mBuscar\u001B[0m por:");
 // // Console.WriteLine(" (por tipo)");
-// Console.WriteLine("            Persona:     2 / p");
+// Console.WriteLine("            personal:     2 / p");
 // Console.WriteLine("            Trabajo:     3 / t");
 // Console.WriteLine("               Ocio:     4 / o");
 // Console.WriteLine(" - \u001B[33mEliminar\u001B[0m:");

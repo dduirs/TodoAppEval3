@@ -1,6 +1,6 @@
 public enum Tipo
 {
-    persona,
+    personal,
     trabajo,
     ocio,
 };
