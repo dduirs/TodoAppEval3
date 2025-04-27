@@ -1,5 +1,10 @@
 public class Operaciones
 {
+
+    public string GetDirectory(){
+        string projectFolder = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName; 
+        return projectFolder+"/tareas.txt";
+    }
     public void ExportarTareas(String path, Tarea tarea, bool append)
     {
         if (!File.Exists(path))

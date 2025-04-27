@@ -134,7 +134,7 @@
                     }
                     break;
                 case 6:
-                    File.WriteAllText("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt", String.Empty);
+                    File.WriteAllText(operaciones.GetDirectory(), String.Empty);
                     if (listaTareas.Count < 1)
                     {
                         Console.WriteLine("         \u001B[33mNo existe ninguna tarea para exportar.\u001B[0m\n");
