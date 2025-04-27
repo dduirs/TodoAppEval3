@@ -117,14 +117,14 @@ public class Operaciones
 
         try
         {
-            if (append)
-            {
+            // if (append)
+            // {
                 fileStream = new FileStream(path, FileMode.Append);
-            }
-            else
-            {
-                fileStream = new FileStream(path, FileMode.Truncate);
-            }
+            // }
+            // else
+            // {
+            //     fileStream = new FileStream(path, FileMode.Truncate);
+            // }
             streamWriter = new StreamWriter(fileStream);
 
             // foreach (var tarea in listTareas)
