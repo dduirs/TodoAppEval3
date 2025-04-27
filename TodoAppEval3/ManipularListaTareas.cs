@@ -1,8 +1,5 @@
-using System.Diagnostics;
-
 public class ManipularListaTareas
 {
-
     public void SortTareas(List<Tarea> listaTareas, Tipo tipo)
     {
         Console.WriteLine("\u001B[32m────────────────────────────────────────────────────────────────────────────────────────────────\u001B[0m");
@@ -17,25 +14,7 @@ public class ManipularListaTareas
         }
         Console.WriteLine("\u001B[32m────────────────────────────────────────────────────────────────────────────────────────────────\u001B[0m\n");
     }
-
-    // public void EliminarTarea(List<Tarea> listaTareas, int id)
-    // {
-    //     Console.WriteLine("\u001B[33m────────────────────────────────────────────────────────────────────────────────────────────────\u001B[0m");
-    //     var list1 = listaTareas;
-
-    //     foreach (var tarea in list1)
-    //     {
-    //         if (tarea.Id == id)
-    //         {
-    //             tarea.ImprimirData();
-    //             list1.Remove(tarea);
-    //             // listaTareas.removeif(new Predicate<tarea>());
-    //         }
-    //     }
-    //     Console.WriteLine("\u001B[33m────────────────────────────────────────────────────────────────────────────────────────────────\u001B[0m\n");
-    //     // return list1;
-    // }
-
+    
     public void ImprimirTareas(List<Tarea> listaTareas)
     {
         {
@@ -47,44 +26,4 @@ public class ManipularListaTareas
             Console.WriteLine("");
         }
     }
-
-    // public List<Tarea> VerificarIdUnico(List<Tarea> listaTareas, List<Tarea> listaImportada)
-    // {
-    //     List<Tarea> listaActual = new List<Tarea>();
-    //     int x = 0;
-    //     Tarea tarea;
-    //     foreach (Tarea tareaTemp in listaImportada)
-    //     {
-    //         tarea = listaTareas.Find(t => t.Id == tareaTemp.Id);
-    //         if (listaImportada.Remove(tarea))
-    //         {
-    //             listaActual.Add(tarea);
-    //         }
-    //         x++;
-    //     }
-    //     return listaActual;
-    // }
-
-    public List<Tarea> ReasignarIdUnico(int idSiguenteTarea, List<Tarea> listaTareas)
-    {
-        List<Tarea> listaActual = new List<Tarea>();
-        int x = 0;
-        foreach (Tarea tarea in listaTareas)
-        {
-            tarea.Id = idSiguenteTarea + x;
-            listaActual.Add(tarea);
-            x++;
-            // int x = 1;
-            // foreach (var i in tareaData)
-            // {
-            //     // Console.Write(i);
-            //     if (x == 1)
-            //     {
-            //         int.TryParse(i, out idTarea);
-            //     }
-            // }
-        }
-        return listaActual;
-    }
 }
-

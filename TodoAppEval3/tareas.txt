@@ -1,0 +1,3 @@
+12,eval3,C#,trabajo,True
+13,chill,sofa,ocio,True
+14,leer,libro,personal,False

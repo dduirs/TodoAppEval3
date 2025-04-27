@@ -1,7 +1,3 @@
-//1. - Crear tareas: se pedirá el nombre, descripción, tipo (personal, trabajo, ocio) y prioridad de la tarea
-//                                                      (^ necesario utilizar un Enum por los tipos)
-// - El id se asignará automáticamente y será único para cada tarea.
-// - La prioridad es un booleano.
 public class Tarea
 {
     public int Id { get; set; }
@@ -42,9 +38,7 @@ public class Tarea
 
     public String ExportarData()
     {
-        // return "ID: " + this.Id + "   Nombre: " + this.Nombre + "   Descripción: " + this.Descripcion + "   Tipo: " + this.tipo + "   Prioridad: " + this.Prioridad;
         return this.Id + "," + this.Nombre + "," + this.Descripcion + "," + this.tipo + "," + this.Prioridad;
-
     }
 
     public void ImprimirData()
@@ -64,7 +58,6 @@ public class Tarea
     {
         string? input;
         Tipo tipo;
-        // Console.Write("   # Elige el tipo de la tarea (\u001B[32mp\u001B[0m = personal, \u001B[32mt\u001B[0m = trabajo, \u001B[32mo\u001B[0m = ocio): \u001B[32m");
         bool tipoValida;
         do
         {
@@ -116,60 +109,5 @@ public class Tarea
         }
         this.Id = id;
     }
-    // public void CrearTarea(int id)
-    // {
-    //     string? input;
-    //     Tipo tipo;
-    //     // Console.Write("   # Elige el tipo de la tarea (\u001B[32mp\u001B[0m = personal, \u001B[32mt\u001B[0m = trabajo, \u001B[32mo\u001B[0m = ocio): \u001B[32m");
-    //     bool tipoValida;
-    //     do
-    //     {
-    //         tipo = (Tipo)Console.Read();
-    //         if ((int)tipo == 111 || (int)tipo == 112 || (int)tipo == 116)
-    //         {
-    //             tipoValida = true;
-    //         }
-    //         else
-    //         {
-    //             Console.WriteLine("\u001B[33mLa entrada no es válida.\u001B[0m Las opciones son: \u001B[32mp\u001B[0m = personal, \u001B[32mt\u001B[0m = trabajo, \u001B[32mo\u001B[0m = ocio.");
-    //             tipoValida = false;
-    //         }
-    //         Console.ReadLine();
-    //     }
-    //     while (!tipoValida);
-
-    //     if ((int)tipo == 111)
-    //     {
-    //         tipo = Tipo.ocio;
-    //     }
-    //     else if ((int)tipo == 112)
-    //     {
-    //         tipo = Tipo.personal;
-    //     }
-    //     else if ((int)tipo == 116)
-    //     {
-    //         tipo = Tipo.trabajo;
-    //     }
-    //     this.tipo = tipo;
-
-    //     Console.Write("\u001B[0m   # \u001B[32mEscribe el nombre de la tarea: \u001B[0m");
-    //     input = Console.ReadLine();
-    //     this.Nombre = input;
-
-    //     Console.Write("   # Escribe la descripción de la tarea: \u001B[32m");
-    //     input = Console.ReadLine();
-    //     this.Descripcion = input;
-
-    //     Console.Write("\u001B[0m   # \u001B[32mEscribe si la tarea es prioridad (s o n): \u001B[0m");
-    //     input = Console.ReadLine();
-    //     if (input == "s")
-    //     {
-    //         this.Prioridad = true;
-    //     }
-    //     else
-    //     {
-    //         this.Prioridad = false;
-    //     }
-    //     this.Id = id;
-    // }
+   
 }
