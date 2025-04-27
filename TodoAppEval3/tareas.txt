@@ -1,0 +1,4 @@
+10,play,hard,ocio,False
+11,work,harder,trabajo,True
+12,tomarSol,tomar 1 dia de sol,ocio,False
+12,tomarSol,tomar 1 dia de sol,ocio,False

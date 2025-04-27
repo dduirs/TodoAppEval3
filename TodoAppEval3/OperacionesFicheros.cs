@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Reflection.Metadata;
 
 public class Operaciones
 {
@@ -16,23 +17,23 @@ public class Operaciones
         {
             FileInfo fileInfo = new FileInfo(ruta);
             Console.WriteLine("Nombre: " + fileInfo.Name);
-            Console.WriteLine("Tamaño: " + fileInfo.Length);
-            Console.WriteLine("Directorio: " + fileInfo.DirectoryName);
-            Console.WriteLine("Extensión: " + fileInfo.Extension);
-            Console.WriteLine("Creado: " + fileInfo.CreationTime);
-            Console.WriteLine("Ultima modificación: " + fileInfo.LastWriteTime);
-            Console.WriteLine("Ultimo acceso: " + fileInfo.LastAccessTime);
-            Console.WriteLine("Atributos: " + fileInfo.Attributes);
-            Console.WriteLine("Es un directorio: " + fileInfo.Attributes.HasFlag(FileAttributes.Directory));
-            Console.WriteLine("Es un fichero: " + fileInfo.Attributes.HasFlag(FileAttributes.Normal));
-            Console.WriteLine("Es un fichero oculto: " + fileInfo.Attributes.HasFlag(FileAttributes.Hidden));
-            Console.WriteLine("Es un fichero de sistema: " + fileInfo.Attributes.HasFlag(FileAttributes.System));
-            Console.WriteLine("Es un fichero de solo lectura: " + fileInfo.Attributes.HasFlag(FileAttributes.ReadOnly));
-            Console.WriteLine("Es un fichero de archivo: " + fileInfo.Attributes.HasFlag(FileAttributes.Archive));
-            Console.WriteLine("Es un fichero de dispositivo: " + fileInfo.Attributes.HasFlag(FileAttributes.Device));
-            Console.WriteLine("Es un fichero de temporal: " + fileInfo.Attributes.HasFlag(FileAttributes.Temporary));
-            Console.WriteLine("Es un fichero de comprimido: " + fileInfo.Attributes.HasFlag(FileAttributes.Compressed));
-            Console.WriteLine("Es un fichero de encriptado: " + fileInfo.Attributes.HasFlag(FileAttributes.Encrypted));
+            Console.WriteLine("Tamaño: " + fileInfo.Length);            
+            // Console.WriteLine("Directorio: " + fileInfo.DirectoryName);
+            // Console.WriteLine("Extensión: " + fileInfo.Extension);
+            // Console.WriteLine("Creado: " + fileInfo.CreationTime);
+            // Console.WriteLine("Ultima modificación: " + fileInfo.LastWriteTime);
+            // Console.WriteLine("Ultimo acceso: " + fileInfo.LastAccessTime);
+            // Console.WriteLine("Atributos: " + fileInfo.Attributes);
+            // Console.WriteLine("Es un directorio: " + fileInfo.Attributes.HasFlag(FileAttributes.Directory));
+            // Console.WriteLine("Es un fichero: " + fileInfo.Attributes.HasFlag(FileAttributes.Normal));
+            // Console.WriteLine("Es un fichero oculto: " + fileInfo.Attributes.HasFlag(FileAttributes.Hidden));
+            // Console.WriteLine("Es un fichero de sistema: " + fileInfo.Attributes.HasFlag(FileAttributes.System));
+            // Console.WriteLine("Es un fichero de solo lectura: " + fileInfo.Attributes.HasFlag(FileAttributes.ReadOnly));
+            // Console.WriteLine("Es un fichero de archivo: " + fileInfo.Attributes.HasFlag(FileAttributes.Archive));
+            // Console.WriteLine("Es un fichero de dispositivo: " + fileInfo.Attributes.HasFlag(FileAttributes.Device));
+            // Console.WriteLine("Es un fichero de temporal: " + fileInfo.Attributes.HasFlag(FileAttributes.Temporary));
+            // Console.WriteLine("Es un fichero de comprimido: " + fileInfo.Attributes.HasFlag(FileAttributes.Compressed));
+            // Console.WriteLine("Es un fichero de encriptado: " + fileInfo.Attributes.HasFlag(FileAttributes.Encrypted));
         }
     }
 
@@ -102,8 +103,11 @@ public class Operaciones
     //     // listTareas.Add();
     // }
 
-    public void ExportarTareas(String path, Tarea tarea)
+    public void ExportarTareas(String path, Tarea tarea, bool append)
     {
+        // if (append){
+        //     File.Create(path);
+        // }
         if (!File.Exists(path))
         {
             File.Create(path);
@@ -113,7 +117,14 @@ public class Operaciones
 
         try
         {
-            fileStream = new FileStream(path, FileMode.Append);
+            if (append)
+            {
+                fileStream = new FileStream(path, FileMode.Append);
+            }
+            else
+            {
+                fileStream = new FileStream(path, FileMode.Truncate);
+            }
             streamWriter = new StreamWriter(fileStream);
 
             // foreach (var tarea in listTareas)
@@ -141,26 +152,82 @@ public class Operaciones
                 Console.WriteLine("Error: " + e.Message);
             }
         }
-
     }
 
-    public void ImportarTareas(String path, )
+    public List<Tarea> ImportarTareas(String path)
     {
+        List<Tarea> listaImportada = new List<Tarea>();
         FileStream? fileStream = null;
         StreamReader? streamReader = null;
         try
         {
+            String[]? tareaData;
+            String? linea = null;
+            // Tarea tarea = new Tarea();
+
             fileStream = new FileStream(path, FileMode.Open);
             streamReader = new StreamReader(fileStream);
 
-            String? linea = null;
+            Tarea tarea;
+            int idTarea = -1;
+            Tipo tipo = Tipo.personal;
+            bool prioridad = true;
+
             while ((linea = streamReader.ReadLine()) != null)
             {
-                Console.WriteLine(linea);
-                // streamReader.ReadLine();
+                // Console.WriteLine(linea);
+                tareaData = linea.Split(",");
+                int x = 1;
+                foreach (var i in tareaData)
+                {
+                    // Console.Write(i);
+                    if (x != tareaData.Count())
+                    {
+                        Console.Write(", ");
+                    }
+                    if (x == 1)
+                    {
+                        int.TryParse(i, out idTarea);
+                    }
+                    else if (x == 4)
+                    {
+                        if (i == "trabajo")
+                        {
+                            tipo = Tipo.trabajo;
+                        }
+                        if (i == "personal")
+                        {
+                            tipo = Tipo.personal;
+                        }
+                        if (i == "ocio")
+                        {
+                            tipo = Tipo.ocio;
+                        }
+                    }
+                    else if (x == 5)
+                    {
+                        if (i == "True" || i == "true")
+                        {
+                            prioridad = true;
+                        }
+                        else
+                        {
+                            prioridad = false;
+                        }
+                    }
+                    x++;
+                    // Console.WriteLine();
+                }
+                // Console.WriteLine("idTarea ="+idTarea);
+                // Console.WriteLine("tareaData[1] ="+tareaData[1]);
+                // Console.WriteLine("tareaData[2] ="+tareaData[2]);
+                // Console.WriteLine("tipo ="+ tipo);
+                // Console.WriteLine("prioridad="+prioridad);
+                tarea = new Tarea(idTarea, tareaData[1], tareaData[2], tipo, prioridad);
+                
+                listaImportada.Add(tarea);
+                // streamReader.Close();
             }
-            streamReader.Close();
-
         }
         catch (FileNotFoundException e)
         {
@@ -182,7 +249,7 @@ public class Operaciones
                 Console.WriteLine("Error: " + e.Message);
             }
         }
-
+        return listaImportada;
     }
 
     //     public void ImportarUsuarios(String path)

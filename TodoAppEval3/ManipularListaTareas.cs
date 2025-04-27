@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 public class ManipularListaTareas
 {
 
@@ -34,16 +36,55 @@ public class ManipularListaTareas
     //     // return list1;
     // }
 
-    // public void ImprimirTareas(List<Tarea> listaTareas)
+    public void ImprimirTareas(List<Tarea> listaTareas)
+    {
+        {
+            var list1 = listaTareas;
+            foreach (var tarea in list1)
+            {
+                tarea.ImprimirData();
+            }
+            Console.WriteLine("");
+        }
+    }
+
+    // public List<Tarea> VerificarIdUnico(List<Tarea> listaTareas, List<Tarea> listaImportada)
     // {
+    //     List<Tarea> listaActual = new List<Tarea>();
+    //     int x = 0;
+    //     Tarea tarea;
+    //     foreach (Tarea tareaTemp in listaImportada)
     //     {
-    //         var list1 = listaTareas;
-    //         foreach (var tarea in list1)
+    //         tarea = listaTareas.Find(t => t.Id == tareaTemp.Id);
+    //         if (listaImportada.Remove(tarea))
     //         {
-    //             tarea.ImprimirData();
+    //             listaActual.Add(tarea);
     //         }
+    //         x++;
     //     }
+    //     return listaActual;
     // }
 
+    public List<Tarea> ReasignarIdUnico(int idSiguenteTarea, List<Tarea> listaTareas)
+    {
+        List<Tarea> listaActual = new List<Tarea>();
+        int x = 0;
+        foreach (Tarea tarea in listaTareas)
+        {
+            tarea.Id = idSiguenteTarea + x;
+            listaActual.Add(tarea);
+            x++;
+            // int x = 1;
+            // foreach (var i in tareaData)
+            // {
+            //     // Console.Write(i);
+            //     if (x == 1)
+            //     {
+            //         int.TryParse(i, out idTarea);
+            //     }
+            // }
+        }
+        return listaActual;
+    }
 }
 

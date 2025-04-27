@@ -1,7 +1,5 @@
 ﻿// Crea un programa que permita gestionar tareas personales.
 // - TODO: ID. será único para cada tarea.
-//5. - Importar tareas: se guardarán en la lista que gestiona la app las tareas ubicadas en el
-//                    fichero tareas.txt.
 class Program
 {
     public static void Main(string[] args)
@@ -10,22 +8,24 @@ class Program
         ManipularListaTareas manipularLista = new ManipularListaTareas();
         Tarea tarea;
         List<Tarea> listaTareas = [];
+        List<Tarea> listaImportada = [];
         bool appActivo = true;
-        int idTarea = 10; // los id empezan por 10 para que puedas eliminar las tareas del menu directamente.
+        int idAsignada = 10;
+        int tareaCount = 0; // los id empezan por 10 para que puedas eliminar las tareas del menu directamente.
         do
         {
             Console.WriteLine("  ───────── MENÚ ────────");
             Console.WriteLine(" - \u001B[32mCrear tarea:\u001B[0m          1");
             Console.WriteLine(" - \u001B[32mBuscar tareas:\u001B[0m");
-            Console.WriteLine("            personal:    2 / p");
+            Console.WriteLine("           personal:     2 / p");
             Console.WriteLine("            trabajo:     3 / t");
             Console.WriteLine("               ocio:     4 / o");
             Console.WriteLine(" - \u001B[33mEliminar tarea:");
             Console.WriteLine("      escribe el id.\u001B[0m  o  5");
-            Console.WriteLine(" - \u001B[32m Importar tareas:\u001B[0m   6");
-            Console.WriteLine(" - \u001B[32m Exportar tareas:\u001B[0m   7");
+            Console.WriteLine(" - \u001B[32m Exportar tareas:\u001B[0m     6");
+            Console.WriteLine(" - \u001B[32m Importar tareas:\u001B[0m     7");
             Console.WriteLine(" -           ~  Salir:   8");
-            Console.WriteLine("  ──────────────────────── ");
+            Console.WriteLine("  ───────────────────────");
 
             string? seleccion;
             int seleccionInt;
@@ -49,63 +49,22 @@ class Program
             {
                 int.TryParse(seleccion, out seleccionInt);
             }
-            int tareaID = -1;
-            if (seleccionInt > 7 && seleccionInt < 10)
-            {
-                seleccionInt = 8;
-            }
+            int idTareaBuscada = -1;
             if (seleccionInt > 9)
             {
-                tareaID = seleccionInt;
+                idTareaBuscada = seleccionInt;
                 seleccionInt = 5; // saltar a caso 5 -> "Eliminar tarea por ID"
             }
             switch (seleccionInt)
             {
                 case 1:
                     Console.WriteLine("\u001B[32m  Creando una tarea nueva:\u001B[0m\n");
-                    string? input;
-                    Tipo tipo;
                     Console.Write("   # Elige el tipo de la tarea (\u001B[32mp\u001B[0m = personal, \u001B[32mt\u001B[0m = trabajo, \u001B[32mo\u001B[0m = ocio): \u001B[32m");
-                    bool tipoValida;
-                    do
-                    {
-                        tipo = (Tipo)Console.Read();
-                        if ((int)tipo == 111 || (int)tipo == 112 || (int)tipo == 116)
-                        {
-                            tipoValida = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("\u001B[33mLa entrada no es válida.\u001B[0m Las opciones son: \u001B[32mp\u001B[0m = personal, \u001B[32mt\u001B[0m = trabajo, \u001B[32mo\u001B[0m = ocio.");
-                            tipoValida = false;
-                        }
-                        Console.ReadLine();
-                    }
-                    while (!tipoValida);
-                    // tipo = (Tipo)inputInt;
-                    tarea = new Tarea(idTarea, tipo);
-
-                    Console.Write("\u001B[0m   # \u001B[32mEscribe el nombre de la tarea: \u001B[0m");
-                    input = Console.ReadLine();
-                    tarea.Nombre = input;
-
-                    Console.Write("   # Escribe la descripción de la tarea: \u001B[32m");
-                    input = Console.ReadLine();
-                    tarea.Descripcion = input;
-
-                    Console.Write("\u001B[0m   # \u001B[32mEscribe si la tarea es prioridad (s o n): \u001B[0m");
-                    input = Console.ReadLine();
-                    if (input == "s")
-                    {
-                        tarea.Prioridad = true;
-                    }
-                    else
-                    {
-                        tarea.Prioridad = false;
-                    }
-
+                    tarea = new Tarea();
+                    tarea.CrearTarea(idAsignada);
                     listaTareas.Add(tarea);
-                    idTarea++;
+                    idAsignada++;
+                    tareaCount++;
                     Console.WriteLine("\n─────────────\u001B[32m────────────────────────────────────────────────────────────────────────────────────\u001B[0m");
                     Console.Write("\u001B[32mTAREA CREADA:  \u001B[0m");
                     tarea.ImprimirData();
@@ -124,14 +83,28 @@ class Program
                     manipularLista.SortTareas(listaTareas, Tipo.ocio);
                     break;
                 case 5:
-                    if (tareaID > 0)
+                    if (idTareaBuscada > 0)
                     {
-                        tarea = listaTareas.Find(t => t.Id == tareaID);
-                        listaTareas.Remove(tarea);
-                        // listaTareas = manipularLista.EliminarTarea(listaTareas, tareaID);
-                        Console.WriteLine("\n   ──\u001B[33m────────────────────\u001B[0m");
-                        Console.WriteLine("      Tarea " + tareaID + " eliminada.");
-                        Console.WriteLine("   ──\u001B[33m────────────────────\u001B[0m\n");
+                        try
+                        {
+                            tarea = listaTareas.Find(t => t.Id == idTareaBuscada);
+                            if (listaTareas.Remove(tarea))
+                            {
+                                // listaTareas = manipularLista.EliminarTarea(listaTareas, idTareaBuscada);
+                                Console.WriteLine("\n   ──\u001B[33m────────────────────\u001B[0m");
+                                Console.WriteLine("      Tarea " + idTareaBuscada + " eliminada.");
+                                Console.WriteLine("   ──\u001B[33m────────────────────\u001B[0m\n");
+                                tareaCount--;
+                            }
+                            else
+                            {
+                                Console.WriteLine("     \u001B[33mEl id no existe.\u001B[0m Intentar de nuevo.\n");
+                            }
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            Console.WriteLine("Error: " + e.Message);
+                        }
                     }
                     else
                     {
@@ -139,44 +112,140 @@ class Program
                         {
                             Console.WriteLine("     Escribe el id de la tarea que quieres eliminar: ");
                             seleccion = Console.ReadLine();
-                            int.TryParse(seleccion, out tareaID);
-                            if (tareaID > -1 && tareaID < 10)
+                            int.TryParse(seleccion, out idTareaBuscada);
+                            if (idTareaBuscada > -1 && idTareaBuscada < 10)
                             {
                                 Console.WriteLine("     \u001B[33mEl id no existe.\u001B[0m Intentar de nuevo, o escribe -1 para salir.");
                             }
-                        } while (tareaID > -1 && tareaID < 10);
-                        if (tareaID < 0)
+                            else
+                            {
+                                tarea = listaTareas.Find(t => t.Id == idTareaBuscada);
+                                if (listaTareas.Remove(tarea))
+                                {
+                                    // listaTareas = manipularLista.EliminarTarea(listaTareas, idTareaBuscada);
+                                    Console.WriteLine("\n   ──\u001B[33m────────────────────\u001B[0m");
+                                    Console.WriteLine("      Tarea " + idTareaBuscada + " eliminada.");
+                                    Console.WriteLine("   ──\u001B[33m────────────────────\u001B[0m\n");
+                                    tareaCount--;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("     \u001B[33mEl id no existe.\u001B[0m Intentar de nuevo.");
+                                }
+                            }
+                        } while (idTareaBuscada > -1 && idTareaBuscada < 10);
+                        if (idTareaBuscada < 0)
                         {
                             Console.WriteLine("     Cargando menú ...");
                             break;
                         }
                         // EliminarTarea por id (seleccionInt)
-                        Console.WriteLine("\n   ──\u001B[33m────────────────────\u001B[0m");
-                        Console.WriteLine("      Tarea " + tareaID + " eliminada.");
-                        Console.WriteLine("   ──\u001B[33m────────────────────\u001B[0m\n");
+                        // Console.WriteLine("\n   ──\u001B[33m────────────────────\u001B[0m");
+                        // Console.WriteLine("      Tarea " + idTareaBuscada + " eliminada.");
+                        // Console.WriteLine("   ──\u001B[33m────────────────────\u001B[0m\n");
                     }
                     break;
                 case 6:
-                    Console.WriteLine("         Gestionar ficheros " + seleccionInt + "");
-                    foreach (var todo in listaTareas)
+                    if (listaTareas.Count() < 1)
                     {
-                        operaciones.ImportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt", todo);
+                        Console.WriteLine("         \u001B[33mNo existe ninguna tarea para exportar.\u001B[0m\n");
                     }
-                    Console.WriteLine("         Las tareas (" + listaTareas.Count() + ") se han exportado correctamente");
+                    else
+                    {
+                        // operaciones.ObtenerInformacion("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt");
+                        // bool borrar = true;
+                        listaImportada = operaciones.ImportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt");
+                        var i = listaImportada.Count();
+                        // if (listaImportada.Count() == 0){
+                            while (i > 0)
+                            {
+                                operaciones.ExportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt", listaTareas[0], false);
+                                i--;
+                            }
+                        // }
+                        // borrar = false;
+                        foreach (var todo in listaTareas)
+                        {
+                            operaciones.ExportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt", todo, true);
+                        }
+                        Console.WriteLine("         Las tareas (" + listaTareas.Count() + ") se han exportado correctamente.\n");
+
+                        // foreach (var todo in listaTareas)
+                        // {
+                        //     operaciones.ExportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt", todo, true);
+                        // }
+                        // Console.WriteLine("         Las tareas (" + listaTareas.Count() + ") se han exportado correctamente.\n");
+                    }
                     break;
                 case 7:
-                    foreach (var todo in listaTareas)
+                    listaImportada = operaciones.ImportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt");
+                    if (listaImportada.Count() == 0)
                     {
-                        operaciones.ExportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt", todo);
+                        Console.WriteLine("         \u001B[33mNo existen tareas para importar.\u001B[0m\n");
                     }
-                    Console.WriteLine("         Las tareas (" + listaTareas.Count() + ") se han exportado correctamente");
+                    else
+                    {
+                        Console.WriteLine("         Habían listaTareas.Count() =" + listaTareas.Count() + " tareas.\n");
+                        Console.WriteLine("         Habían tareaCount =" + tareaCount + " tareas.\n");
+                        Tarea tempTarea;
+                        // List<Tarea> listaTemp = new List<Tarea>();
+                        foreach (var y in listaImportada)
+                        {
+                            tempTarea = listaTareas.Find(t => t.Id == y.Id);
+                            if (listaImportada.Remove(tempTarea))
+                            {
+                                Console.WriteLine("         No anadimos esta tarea.\n");
+                            }
+                        }
+                        // listaImportada = manipularLista.ReasignarIdUnico(idAsignada, listaImportada);
+
+                        tareaCount = tareaCount + listaImportada.Count();
+                        idAsignada = tareaCount + 11;
+                        Console.WriteLine("         Ahora hay " + tareaCount + " tareas activas.\n");
+                        Console.WriteLine("         Ahora hay  idAsignada:" + idAsignada + ".\n");
+
+                        Console.WriteLine("         Hay listaTareas.Count() =" + listaTareas.Count() + " tareas.\n");
+
+                        Console.WriteLine("         Las siguentes tareas (" + listaImportada.Count() + ") se han importado correctamente: ");
+                        manipularLista.ImprimirTareas(listaImportada);
+                        foreach (Tarea tareaNueva in listaImportada)
+                        {
+                            listaTareas.Add(tareaNueva);
+                        }
+                         Tarea tempTarea2;
+                         int count = 1;
+                        // List<Tarea> listaTemp = new List<Tarea>();
+                        // var i = listaTareas.Count();
+                        for(int i = listaTareas.Count(); i > 0; i--)
+                        {
+                            tempTarea2 = listaTareas.Find(t => t.Id == listaTareas[i].Id);
+                            if (listaTareas.Remove(tempTarea2))
+                            {
+                                Console.WriteLine("         Tarea2 repetida eliminada.\n");
+                            }
+                            else{
+                                Console.WriteLine("         nada eliminada "+count);
+                            }
+                        }
+                        // bool borrar = true;
+                        // var i = listaTareas.Count();
+                        // while (i > 0)
+                        // {
+                        //     i--;
+                        // }
+                        // borrar = false;
+                        // foreach (var todo in listaTareas)
+                        // {
+                        //     operaciones.ExportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt", todo, false);
+                        //     operaciones.ExportarTareas("C:/Users/davo_/Documents/GitHub/TodoAppEval3/TodoAppEval3/tareas.txt", todo, true);
+                        // }
+                        // Console.WriteLine("         Las tareas (" + listaTareas.Count() + ") se han exportado correctamente.\n");
+                    }
                     break;
                 case 8:
                     Console.WriteLine("     Adios amigo.");
                     appActivo = false;
                     break;
-                // manipularLista.ImprimirTareas(listaTareas);
-                // break;
                 default:
                     Console.WriteLine("     \u001B[33mLa selección no es válida.\u001B[0m\n     Intentar de nuevo.\n");
                     break;
